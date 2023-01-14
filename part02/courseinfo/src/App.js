@@ -2,7 +2,11 @@ const Course = ({course}) => {
   return (
     <div>
       <h1>{course.name}</h1>
-      {course.parts.map(list => <li>{list.name} - {list.exercises} exercise.</li>)}
+      {course.parts.map(list => 
+       <li key={list.id}>
+          {list.name} - {list.exercises} exercise.
+        </li>
+      )}
     </div>
   )
 }
