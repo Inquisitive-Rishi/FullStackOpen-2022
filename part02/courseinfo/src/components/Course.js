@@ -11,6 +11,7 @@ const Course = ({course}) => {
             <p><strong>Total exercises - {total}</strong></p>
         </div>
       )
+
     }
 
     export default Course
