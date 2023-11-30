@@ -16,7 +16,7 @@ const Button = ({onClick,txt}) => {
   )
 }
 
-const CountStat = ({ txt, value }) => {
+const Statistics = ({ txt, value }) => {
   return (
     <>
       <p>{txt}:{value}</p>
@@ -36,12 +36,12 @@ const App = () => {
       <Button onClick={() => setNeutral(neutral+1)} txt='neutral'/>
       <Button onClick={() => setBad(bad+1)} txt='bad'/>
       <LargeTxt txt='statistics'/>
-      <CountStat txt='good' value={good}/>
-      <CountStat txt='neutral' value={neutral}/>
-      <CountStat txt='bad' value={bad}/>
-      <CountStat txt='Total' value={good+neutral+bad}/>
-      <CountStat txt='Average' value={(good - bad)/(good+neutral+bad)}/>
-      <CountStat txt='Positive' value={(good)/(good+neutral+bad)*100+' %'}/>
+      <Statistics txt='good' value={good}/>
+      <Statistics txt='neutral' value={neutral}/>
+      <Statistics txt='bad' value={bad}/>
+      <Statistics txt='Total' value={good+neutral+bad}/>
+      <Statistics txt='Average' value={(good - bad)/(good+neutral+bad)}/>
+      <Statistics txt='Positive' value={(good)/(good+neutral+bad)*100+' %'}/>
     </>
   )
 }
