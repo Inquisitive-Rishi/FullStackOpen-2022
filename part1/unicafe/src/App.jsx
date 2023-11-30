@@ -16,7 +16,7 @@ const Button = ({onClick,txt}) => {
   )
 }
 
-const Statistics = ({ txt, value }) => {
+const Statistics = ({txt, value}) => {
   return (
     <>
       <p>{txt}:{value}</p>
@@ -29,12 +29,22 @@ const App = () => {
   const [neutral,setNeutral] = useState(0)
   const [bad,setBad] = useState(0)
   
+  const handleGoodBtn = () => {
+    setGood(good+1)
+  }
+  const handleNeutralBtn = () => {
+    setNeutral(neutral+1)
+  }
+  const handleBadBtn = () => {
+    setBad(bad+1)
+  }
+
   return (
     <>
       <LargeTxt txt='Give feedback'/>
-      <Button onClick={() => setGood(good+1)} txt='good'/>
-      <Button onClick={() => setNeutral(neutral+1)} txt='neutral'/>
-      <Button onClick={() => setBad(bad+1)} txt='bad'/>
+      <Button onClick={handleGoodBtn} txt='good'/>
+      <Button onClick={handleNeutralBtn} txt='neutral'/>
+      <Button onClick={handleBadBtn} txt='bad'/>
       <LargeTxt txt='statistics'/>
       <Statistics txt='good' value={good}/>
       <Statistics txt='neutral' value={neutral}/>
