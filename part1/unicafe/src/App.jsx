@@ -24,19 +24,25 @@ const Statistics = ({txt, value}) => {
   )
 }
 
+
+
 const App = () => {
   const [good,setGood] = useState(0)
   const [neutral,setNeutral] = useState(0)
   const [bad,setBad] = useState(0)
+  const [total, setTotal] = useState(0)
   
   const handleGoodBtn = () => {
     setGood(good+1)
+    setTotal(total+1);
   }
   const handleNeutralBtn = () => {
     setNeutral(neutral+1)
+    setTotal(total+1);
   }
   const handleBadBtn = () => {
     setBad(bad+1)
+    setTotal(total+1);
   }
 
   return (
@@ -49,9 +55,9 @@ const App = () => {
       <Statistics txt='good' value={good}/>
       <Statistics txt='neutral' value={neutral}/>
       <Statistics txt='bad' value={bad}/>
-      <Statistics txt='Total' value={good+neutral+bad}/>
-      <Statistics txt='Average' value={(good - bad)/(good+neutral+bad)}/>
-      <Statistics txt='Positive' value={(good)/(good+neutral+bad)*100+' %'}/>
+      <Statistics txt='Total' value={total}/>
+      <Statistics txt='Average' value={(good - bad)/(total)}/>
+      <Statistics txt='Positive' value={(good)/(total)*100+' %'}/>
     </>
   )
 }
