@@ -9,7 +9,7 @@ const LargeTxt = ({txt}) => {
 }
 
 const Button = ({onClick,txt}) => {
-  return ( 
+  return (  
     <>
       <button onClick={onClick}>{txt}</button>
     </>
@@ -28,7 +28,7 @@ const App = () => {
   const [good,setGood] = useState(0)
   const [neutral,setNeutral] = useState(0)
   const [bad,setBad] = useState(0)
-
+  
   return (
     <>
       <LargeTxt txt='Give feedback'/>
@@ -39,6 +39,9 @@ const App = () => {
       <CountStat txt='good' value={good}/>
       <CountStat txt='neutral' value={neutral}/>
       <CountStat txt='bad' value={bad}/>
+      <CountStat txt='Total' value={good+neutral+bad}/>
+      <CountStat txt='Average' value={(good - bad)/(good+neutral+bad)}/>
+      <CountStat txt='Positive' value={(good)/(good+neutral+bad)*100+' %'}/>
     </>
   )
 }
