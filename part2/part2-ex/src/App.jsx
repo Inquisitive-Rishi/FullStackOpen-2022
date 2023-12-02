@@ -1,13 +1,25 @@
+import { useState } from "react"
+
 const Course = ({course}) => {
   return (
     <>
       <h1>{course.name}</h1>
-      {course.parts.map(part => <p key={part.id}>{part.name}</p>)}
+      {course.parts.map(part => <p key={part.id}>{part.name} {part.exercises}</p>)}
     </>
   )
 }
 
+const Total = ({course}) => {
+  return (
+    <>
+    <p>Total of {course.parts.reduce((acc,curr) => acc+curr.exercises,0)} exercises.</p>
+    </>
+  )
+}
+
+
 const App = () => {
+
   const course = {
     id: 1,
     name: 'Half Stack application development',
@@ -32,6 +44,7 @@ const App = () => {
   return (
     <>
     <Course course={course}/>
+    <Total course={course}/>
     </>
   )
 }
