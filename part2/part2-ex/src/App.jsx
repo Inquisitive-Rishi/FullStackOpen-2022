@@ -1,3 +1,12 @@
+const Course = ({course}) => {
+  return (
+    <>
+      <h1>{course.name}</h1>
+      {course.parts.map(part => <p key={part.id}>{part.name}</p>)}
+    </>
+  )
+}
+
 const App = () => {
   const course = {
     id: 1,
@@ -22,8 +31,7 @@ const App = () => {
   }
   return (
     <>
-    <h1>{course.name}</h1>
-    {course.parts.map(part => <p key={part.id}>{part.name}</p>)}
+    <Course course={course}/>
     </>
   )
 }
