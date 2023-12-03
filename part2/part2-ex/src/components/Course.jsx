@@ -1,11 +1,17 @@
-const Course = ({course}) => {
+const Course = ({courses}) => {
     return (
       <>
-        <h1>{course[0].name}</h1>
-        {course[0].parts.map(part => <p key={part.id}>{part.name} {part.exercises}</p>)}
-        <h4>Total of {course[0].parts.reduce((acc,curr) => acc+curr.exercises,0)} exercises.</h4>
+      <h1>Web development Curriculum</h1>
+      {courses.map(course => {
+        return (
+        <>
+        <h2>{course.name}</h2>
+        {course.parts.map(part => <p key={part.id}>{part.name} {part.exercises}</p>)}
+        <h4>Total of {course.parts.reduce((acc,curr) => acc+curr.exercises,0)} exercises.</h4>
+        </>
+        )})}
       </>
     )
-}
+  }
 
 export default Course;
