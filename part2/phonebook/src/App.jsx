@@ -17,17 +17,27 @@ const App = () => {
     console.log(e.target.value);
   }
 
-
   const addPerson = (e) => {
     e.preventDefault()
-    const nameObj = {
+    const newObj = {
       name: newName,
       number: newNumber,
       id: person.length + 1
     }
-    setPerson(person.concat(nameObj))
-    setNewName('')
-    setNewNumber('')
+    
+    let checkArr = []
+
+    for (let obj of person) {
+      (obj.name !== newObj.name) ? checkArr.push(0) : checkArr.push(1);
+    }      
+
+    if (checkArr.includes(1)) {
+      alert(`${newObj.name} already exists in phonebook`)
+    } else {
+      setPerson(person.concat(newObj))
+      setNewName('')
+      setNewNumber('')   
+    }
   }
 
   return (
