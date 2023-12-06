@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Person from './components/Person'
+import axios from 'axios'
 
 const App = () => {
 
@@ -39,6 +40,15 @@ const App = () => {
       setNewNumber('')   
     }
   }
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/persons')
+      .then(response => {
+        console.log('data fetching is successful');
+        setPerson(response.data)
+      })
+  }, [])  
 
   return (
     <>
