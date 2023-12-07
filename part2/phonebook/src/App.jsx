@@ -27,7 +27,7 @@ const App = () => {
     }
     
     let checkArr = []
-
+    
     for (let obj of person) {
       (obj.name !== newObj.name) ? checkArr.push(0) : checkArr.push(1);
     }      
@@ -40,15 +40,6 @@ const App = () => {
       setNewNumber('')   
     }
   }
-
-  useEffect(() => {
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
-        console.log('data fetching is successful');
-        setPerson(response.data)
-      })
-  }, [])  
 
   return (
     <>
