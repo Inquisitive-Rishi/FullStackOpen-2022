@@ -5,8 +5,15 @@ import axios from 'axios'
 const App = () => {
 
   const [person, setPerson] = useState([])
-  const [newName, setNewName] = useState("new name")
-  const [newNumber, setNewNumber] = useState("new number");
+  const [newName, setNewName] = useState('')
+  const [newNumber, setNewNumber] = useState('');
+
+  useEffect(() => {
+    axios.get('http://localhost:3001/persons')
+      .then(res => {
+        setPerson(res.data)
+      })
+  },[])
 
   const handleNameChange = (e) => {
     setNewName(e.target.value);
@@ -23,11 +30,10 @@ const App = () => {
     const newObj = {
       name: newName,
       number: newNumber,
-      id: person.length + 1
     }
     
     let checkArr = []
-    
+
     for (let obj of person) {
       (obj.name !== newObj.name) ? checkArr.push(0) : checkArr.push(1);
     }      
@@ -35,11 +41,15 @@ const App = () => {
     if (checkArr.includes(1)) {
       alert(`${newObj.name} already exists in phonebook`)
     } else {
-      setPerson(person.concat(newObj))
-      setNewName('')
-      setNewNumber('')   
+      axios
+        .post('http://localhost:3001/persons', newObj)
+        .then(res => {
+          setPerson(person.concat(res.data))
+          setNewName('')
+          setNewNumber('')  
+        })
+      }
     }
-  }
 
   return (
     <>
