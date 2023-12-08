@@ -41,13 +41,13 @@ const App = () => {
     if (checkArr.includes(1)) {
       const result = window.confirm(`${newObj.name} already exists in phonebook, would you like to update the phone number?`)
         if (result) {
-          personService
-            .createData(newObj)
+          const existingName = persons.find(p => p.name === newObj.name)
+          const changedNumber = {...existingName, number: newObj.number}
+          axios
+            .put(`http://localhost:3001/persons/${existingName.id}`,changedNumber)
             .then(res => {
-            setPersons(persons.concat(res))
-            setNewName('')
-            setNewNumber('')  
-          })
+              setPersons(persons.map(p => p.id !== changedNumber.id ? p : res.data))
+            })
         } else {
           return false;
         }
