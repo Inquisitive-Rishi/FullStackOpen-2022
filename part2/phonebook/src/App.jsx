@@ -5,7 +5,7 @@ import axios from 'axios'
 
 const App = () => {
 
-  const [person, setPerson] = useState([])
+  const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('');
 
@@ -13,7 +13,7 @@ const App = () => {
     personService
     .getAllPersons()
     .then(initialData => {
-        setPerson(initialData)
+        setPersons(initialData)
       })
   },[])
 
@@ -46,7 +46,7 @@ const App = () => {
       personService
       .createData(newObj)
       .then(res => {
-          setPerson(person.concat(res))
+          setPersons(persons.concat(res))
           setNewName('')
           setNewNumber('')  
         })
@@ -67,7 +67,7 @@ const App = () => {
        </form>
       <h1>Names</h1>
       <ul>
-      {person.map(person => 
+      {persons.map(person => 
         <Person person={person} key={person.id}/> 
       )}
       </ul>

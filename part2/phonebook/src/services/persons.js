@@ -10,5 +10,4 @@ const createData = newObj => {
     return axios.post(baseURL, newObj).then(res => res.data)
 }
 
-
 export default { getAllPersons, createData };

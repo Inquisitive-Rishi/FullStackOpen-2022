@@ -1,44 +1,9 @@
 {
   "persons": [
     {
-      "name": "Arto Hellas",
-      "number": "040-123456",
+      "name": "rush",
+      "number": "34342",
       "id": 1
-    },
-    {
-      "name": "Ada Lovelace",
-      "number": "39-44-5323523",
-      "id": 2
-    },
-    {
-      "name": "Dan Abramov",
-      "number": "12-43-234345",
-      "id": 3
-    },
-    {
-      "name": "Mary Poppendieck",
-      "number": "39-23-6423122",
-      "id": 4
-    },
-    {
-      "name": "mr kingpin",
-      "number": "3213141",
-      "id": 5
-    },
-    {
-      "name": "mr random",
-      "number": "234354525",
-      "id": 6
-    },
-    {
-      "name": "this notes will be saved to database",
-      "number": "44432524",
-      "id": 7
-    },
-    {
-      "name": "rishi",
-      "number": "432425",
-      "id": 8
     }
   ]
 }
