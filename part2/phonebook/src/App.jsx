@@ -43,10 +43,10 @@ const App = () => {
     if (checkArr.includes(1)) {
       alert(`${newObj.name} already exists in phonebook`)
     } else {
-      axios
-        .post('http://localhost:3001/persons', newObj)
-        .then(res => {
-          setPerson(person.concat(res.data))
+      personService
+      .createData(newObj)
+      .then(res => {
+          setPerson(person.concat(res))
           setNewName('')
           setNewNumber('')  
         })
