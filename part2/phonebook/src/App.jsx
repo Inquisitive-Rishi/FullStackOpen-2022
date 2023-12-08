@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import Person from './components/Person'
+import personService from './services/persons'
 import axios from 'axios'
 
 const App = () => {
@@ -9,9 +10,10 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('');
 
   useEffect(() => {
-    axios.get('http://localhost:3001/persons')
-      .then(res => {
-        setPerson(res.data)
+    personService
+    .getAllPersons()
+    .then(initialData => {
+        setPerson(initialData)
       })
   },[])
 

@@ -24,6 +24,16 @@
       "name": "mr kingpin",
       "number": "3213141",
       "id": 5
+    },
+    {
+      "name": "mr random",
+      "number": "234354525",
+      "id": 6
+    },
+    {
+      "name": "this notes will be saved to database",
+      "number": "44432524",
+      "id": 7
     }
   ]
 }
