@@ -19,12 +19,10 @@ const App = () => {
 
   const handleNameChange = (e) => {
     setNewName(e.target.value);
-    console.log(e.target.value);
   }
   
   const handleNumberChange = (e) => {
     setNewNumber(e.target.value);
-    console.log(e.target.value);
   }
 
   const addPerson = (e) => {
@@ -54,9 +52,18 @@ const App = () => {
     }
 
     const removePerson = (name,id) => {
+      const url = `http://localhost:3001/persons`
       const result = window.confirm(`remove ${name} with id ${id}?`)
       if (result) {
-        console.log(name, 'removed');
+        axios.delete(`${url}/${id}`).then( res =>
+            axios.get(url)
+            .then(res => {
+              setPersons(res.data)
+            })
+        )
+        .catch(err => {
+          console.log('Error:', err );
+        })
       } else {
         console.log(name, 'ignored');
       }
