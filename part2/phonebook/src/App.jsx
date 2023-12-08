@@ -36,7 +36,7 @@ const App = () => {
     
     let checkArr = []
 
-    for (let obj of person) {
+    for (let obj of persons) {
       (obj.name !== newObj.name) ? checkArr.push(0) : checkArr.push(1);
     }      
 
@@ -50,6 +50,15 @@ const App = () => {
           setNewName('')
           setNewNumber('')  
         })
+      }
+    }
+
+    const removePerson = (name,id) => {
+      const result = window.confirm(`remove ${name} with id ${id}?`)
+      if (result) {
+        console.log(name, 'removed');
+      } else {
+        console.log(name, 'ignored');
       }
     }
 
@@ -68,7 +77,7 @@ const App = () => {
       <h1>Names</h1>
       <ul>
       {persons.map(person => 
-        <Person person={person} key={person.id}/> 
+        <Person person={person} key={person.id} removePerson={() => removePerson(person.name, person.id)}/> 
       )}
       </ul>
 
