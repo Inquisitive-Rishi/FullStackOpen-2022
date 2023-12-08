@@ -39,11 +39,22 @@ const App = () => {
     }      
 
     if (checkArr.includes(1)) {
-      alert(`${newObj.name} already exists in phonebook`)
+      const result = window.confirm(`${newObj.name} already exists in phonebook, would you like to update the phone number?`)
+        if (result) {
+          personService
+            .createData(newObj)
+            .then(res => {
+            setPersons(persons.concat(res))
+            setNewName('')
+            setNewNumber('')  
+          })
+        } else {
+          return false;
+        }
     } else {
-      personService
-      .createData(newObj)
-      .then(res => {
+        personService
+        .createData(newObj)
+        .then(res => {
           setPersons(persons.concat(res))
           setNewName('')
           setNewNumber('')  
@@ -53,7 +64,7 @@ const App = () => {
 
     const removePerson = (name,id) => {
       const url = `http://localhost:3001/persons`
-      const result = window.confirm(`remove ${name} with id ${id}?`)
+      const result = window.confirm(`remove ${name}?`)
       if (result) {
         axios.delete(`${url}/${id}`).then( res =>
             axios.get(url)
