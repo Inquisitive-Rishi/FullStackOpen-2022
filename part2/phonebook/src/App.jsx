@@ -32,6 +32,8 @@ const App = () => {
       number: newNumber,
     }
     
+    const url = 'http://localhost:3001/persons'
+
     let checkArr = []
 
     for (let obj of persons) {
@@ -44,7 +46,7 @@ const App = () => {
           const existingName = persons.find(p => p.name === newObj.name)
           const changedNumber = {...existingName, number: newObj.number}
           axios
-            .put(`http://localhost:3001/persons/${existingName.id}`,changedNumber)
+            .put(`${url}/${existingName.id}`,changedNumber)
             .then(res => {
               setPersons(persons.map(p => p.id !== changedNumber.id ? p : res.data))
             })
