@@ -3,11 +3,32 @@ import Person from './components/Person'
 import personService from './services/persons'
 import axios from 'axios'
 
+const Notification = ({message}) => {
+  const msgStyle = {
+    padding: 10,
+    color: 'black',
+    fontSize: 18,
+    backgroundColor: 'lightgrey',
+    border: '2px solid green',
+    borderRadius: 4,
+    marginTop: 10
+  }
+  if (message === null) {
+    return null;
+  }
+  return (
+    <div style={msgStyle}>
+    {message}
+    </div>
+  )
+}
+
 const App = () => {
 
   const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('');
+  const [okNotification, setOkNotification] = useState('Add users')
 
   useEffect(() => {
     personService
@@ -57,6 +78,10 @@ const App = () => {
         personService
         .createData(newObj)
         .then(res => {
+          setOkNotification(`${res.name} added`)
+          setTimeout(() => {
+            setOkNotification(null)
+          }, 5000);
           setPersons(persons.concat(res))
           setNewName('')
           setNewNumber('')  
@@ -94,6 +119,7 @@ const App = () => {
         <br />
         <button type='submit'>add</button>
        </form>
+       <Notification message={okNotification}/>
       <h1>Names</h1>
       <ul>
       {persons.map(person => 
