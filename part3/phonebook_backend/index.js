@@ -24,8 +24,28 @@ const persons = [
     }
 ]
 
-app.get('/', (req, res) => {
-  res.send('Hello World! to see the content go to /api/persons')
+const getPersonCount = () => {
+  return `Phonebook currently has info for ${persons.length} people.`
+}
+
+function giveDateAndTime() {
+  const currentDate = new Date()
+  const optday = { weekday: 'short' }
+  const optMonth = { month: 'short' }
+  const dayName = currentDate.toLocaleString('en-US', optday)
+  const monthName = currentDate.toLocaleString('en-US', optMonth)
+  const timeZoneName = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  
+  const offsetTZ = currentDate.getTimezoneOffset()
+  const currentTime = currentDate.getHours()+":"+currentDate.getMinutes()+":"+currentDate.getSeconds()
+  const dateToDisplay = `${dayName} ${monthName} ${currentDate.getMonth()} ${currentDate.getFullYear()} ${currentTime} GMT${offsetTZ}, (Indian Standard Time)`;    
+  return dateToDisplay;
+}
+
+app.get('/info', (req, res) => {
+  const currDT = giveDateAndTime()
+  const personCount = getPersonCount()
+  res.send(`${personCount} <br/> ${currDT}`)
 })
 
 app.get('/api/persons', (req, res) => {
