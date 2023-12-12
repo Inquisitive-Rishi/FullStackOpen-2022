@@ -66,10 +66,20 @@ app.get('/api/persons/:id', (req, res) => {
 
 app.post('/api/persons', (req, res) => {
   const body = req.body;
-  body.id = Math.trunc(Math.random()*1000)
-  console.log(body);
-  
-  res.send(body)
+  const personExists = persons.find(p => p.name === body.name)
+
+  if (!(body.name && body.number)) {
+    res.status(204).end()
+  } else {
+    if (personExists) {
+      res.send({
+        "error": "Name must be unique"
+      })
+    } else {
+      body.id = Math.trunc(Math.random()*1000)
+      console.log(body);
+      res.send(body)  
+  }}
 })
 
 app.delete('/api/persons/:id', (req, res) => {
