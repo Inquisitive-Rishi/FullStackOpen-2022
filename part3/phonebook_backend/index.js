@@ -1,6 +1,8 @@
 const express = require('express')
 const app = express()
 
+app.use(express.json())
+
 let persons = [
     { 
       "id": 1,
@@ -40,7 +42,7 @@ function giveDateAndTime() {
   const currentTime = currentDate.getHours()+":"+currentDate.getMinutes()+":"+currentDate.getSeconds()
   const dateToDisplay = `${dayName} ${monthName} ${currentDate.getMonth()} ${currentDate.getFullYear()} ${currentTime} GMT${offsetTZ}, (Indian Standard Time)`;    
   return dateToDisplay;
-}
+}  
 
 app.get('/info', (req, res) => {
   const currDT = giveDateAndTime()
@@ -60,6 +62,14 @@ app.get('/api/persons/:id', (req, res) => {
   } else {
     res.status(404).end()
   }
+})
+
+app.post('/api/persons', (req, res) => {
+  const body = req.body;
+  body.id = Math.trunc(Math.random()*1000)
+  console.log(body);
+  
+  res.send(body)
 })
 
 app.delete('/api/persons/:id', (req, res) => {
