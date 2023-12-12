@@ -1,26 +1,43 @@
 import axios from "axios"
-import { useEffect } from "react"
+import Country from './components/Country'
+import { useEffect, useState } from "react"
 
 const App = () => {
 
+  const [countryName, setCountryName] = useState([])
+
   const countries = []
-  const getCountriesName = () => {
-    axios.get('https://studies.cs.helsinki.fi/restcountries/api/all')
-    .then(res => {
-      const names = res.data;
-      names.map(name => countries.push(name.name.common))
-    })
+  
+  useEffect(() => {
+      axios.get('https://studies.cs.helsinki.fi/restcountries/api/all')
+      .then(res => {
+        const names = res.data;
+        names.map(name => { 
+          countries.push(name.name.common)
+          console.log(name.name.common);
+        }  
+        )
+      })
+  },[])
+
+  const showCountry = (e) => {
+    e.preventDefault()
+    if (countries) {
+      const countriesToShow = countries
+      setCountryName(countriesToShow);
+      console.log(countriesToShow);
+    }
   }
-  
-  
 
   return (
     <>
-    <button onClick={getCountries}>get countries</button>
     <label htmlFor="country">
       find countries: 
-      <input type="text" id="country"/>
+      <input type="text" id="country" onChange={showCountry}/>
     </label>
+    <ul>
+    {countryName.map(cn => <Country key={cn.id} name={cn}/>)}
+    </ul>
     </>
   )
 }
