@@ -53,7 +53,6 @@ const App = () => {
       number: newNumber,
     }
     
-    const url = 'http://localhost:3001/persons'
 
     let checkArr = []
 
@@ -67,7 +66,7 @@ const App = () => {
           const existingName = persons.find(p => p.name === newObj.name)
           const changedNumber = {...existingName, number: newObj.number}
           axios
-            .put(`${url}/${existingName.id}`,changedNumber)
+            .put(`${personService.baseURL}/${existingName.id}`,changedNumber)
             .then(res => {
               setPersons(persons.map(p => p.id !== changedNumber.id ? p : res.data))
               setOkNotification(`${existingName.name} has updated his number to ${changedNumber.number}`)
@@ -94,11 +93,10 @@ const App = () => {
     }
 
     const removePerson = (name,id) => {
-      const url = `http://localhost:3001/persons`
       const result = window.confirm(`remove ${name}?`)
       if (result) {
-        axios.delete(`${url}/${id}`).then( res =>
-            axios.get(url)
+        axios.delete(`${personService.baseURL}/${id}`).then( res =>
+            axios.get(personService.baseURL)
             .then(res => {
               setPersons(res.data)
             })
