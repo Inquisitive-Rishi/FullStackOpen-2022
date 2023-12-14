@@ -70,6 +70,10 @@ const App = () => {
             .put(`${url}/${existingName.id}`,changedNumber)
             .then(res => {
               setPersons(persons.map(p => p.id !== changedNumber.id ? p : res.data))
+              setOkNotification(`${existingName.name} has updated his number to ${changedNumber.number}`)
+              setTimeout(() => {
+                setOkNotification(null)
+              }, 5000);
             })
         } else {
           return false;
@@ -110,6 +114,7 @@ const App = () => {
   return (
     <>
       <h1>Phonebook</h1>
+       <Notification message={okNotification}/>
       <form onSubmit={addPerson}>
         <label htmlFor="name">name</label>
         <input value={newName} onChange={handleNameChange}/>
@@ -119,7 +124,6 @@ const App = () => {
         <br />
         <button type='submit'>add</button>
        </form>
-       <Notification message={okNotification}/>
       <h1>Names</h1>
       <ul>
       {persons.map(person => 
