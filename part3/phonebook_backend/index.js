@@ -46,6 +46,10 @@ function giveDateAndTime() {
   return dateToDisplay;
 }  
 
+app.get('/', (req, res) => {
+  res.send('Hello welcome to this server')
+})
+
 app.get('/info', (req, res) => {
   const currDT = giveDateAndTime()
   const personCount = getPersonCount()
