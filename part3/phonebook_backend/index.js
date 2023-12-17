@@ -1,49 +1,20 @@
+require('dotenv').config()
+const Person = require('./models/person')
 const express = require('express')
 const app = express()
 const cors = require('cors')
 
 app.use(cors())
 app.use(express.json())
+app.use(express.static('dist'))
 
-let persons = [
-    { 
-      "id": 1,
-      "name": "Rishi Raj", 
-      "number": "982-232223"
-    },
-    { 
-      "id": 2,
-      "name": "Kavi Tripathi", 
-      "number": "854-554564"
-    },
-    { 
-      "id": 3,
-      "name": "Bassi Kumar", 
-      "number": "353-885545"
-    },
-    { 
-      "id": 4,
-      "name": "Govind Sahukar", 
-      "number": "568-112213"
-    }
-]
 
 const getPersonCount = () => {
   return `Phonebook currently has info for ${persons.length} people.`
 }
 
 function giveDateAndTime() {
-  const currentDate = new Date()
-  const optday = { weekday: 'short' }
-  const optMonth = { month: 'short' }
-  const dayName = currentDate.toLocaleString('en-US', optday)
-  const monthName = currentDate.toLocaleString('en-US', optMonth)
-  const timeZoneName = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  
-  const offsetTZ = currentDate.getTimezoneOffset()
-  const currentTime = currentDate.getHours()+":"+currentDate.getMinutes()+":"+currentDate.getSeconds()
-  const dateToDisplay = `${dayName} ${monthName} ${currentDate.getMonth()} ${currentDate.getFullYear()} ${currentTime} GMT${offsetTZ}, (Indian Standard Time)`;    
-  return dateToDisplay;
+  return new Date()
 }  
 
 app.get('/', (req, res) => {
@@ -57,7 +28,9 @@ app.get('/info', (req, res) => {
 })
 
 app.get('/api/persons', (req, res) => {
-  res.send(persons)
+  Person.find().then(person => {
+    res.json(person)
+  })
 })
 
 app.get('/api/persons/:id', (req, res) => {
@@ -96,7 +69,6 @@ app.delete('/api/persons/:id', (req, res) => {
   console.log(persons);
 })
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT;
 app.listen(PORT)
 console.log(`server is listening to port ${PORT}`);
-console.log(`Yay!!! I\'m now finally deployed to the internet`);
