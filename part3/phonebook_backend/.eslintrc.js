@@ -4,7 +4,7 @@ module.exports = {
     commonjs: true,
     es2021: true,
   },
-  extends: ['wesbos'],
+  extends: ['eslint:recommended'],
   overrides: [
     {
       env: {
