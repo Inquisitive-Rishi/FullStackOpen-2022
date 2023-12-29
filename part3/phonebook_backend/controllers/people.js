@@ -1,6 +1,7 @@
 const peopleRouter = require('express').Router();
 const Person = require('../models/person');
 
+
 peopleRouter.get('/info', (req, res) => {
   const currDT = new Date();
   res.send(`phonebook <br/> ${currDT}`);
@@ -40,7 +41,7 @@ peopleRouter.post('/', (req, res) => {
   });
 });
 
-peopleRouter.delete('/:id', (req, res, err, next) => {
+peopleRouter.delete('/:id', (req, res, next) => {
   Person.findByIdAndDelete(req.params.id)
     .then(() => {
       res.status(204).end();
